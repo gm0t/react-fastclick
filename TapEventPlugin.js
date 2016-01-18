@@ -52,8 +52,7 @@ function getDistance(coords, nativeEvent) {
 }
 
 var touchEvents = [topLevelTypes.topTouchStart, topLevelTypes.topTouchCancel, topLevelTypes.topTouchEnd, topLevelTypes.topTouchMove];
-
-var dependencies = [topLevelTypes.topMouseDown, topLevelTypes.topMouseMove, topLevelTypes.topMouseUp].concat(touchEvents);
+var dependencies = [].concat(touchEvents);
 
 var eventTypes = {
   click: {
@@ -67,7 +66,7 @@ var eventTypes = {
 
 var usedTouch = false;
 var usedTouchTime = 0;
-var TOUCH_DELAY = 1000;
+var TOUCH_DELAY = 100;
 
 var TapEventPlugin = {
 
@@ -110,7 +109,7 @@ var TapEventPlugin = {
       startCoords.x = 0;
       startCoords.y = 0;
     }
-    if (event && event.type === 'touchend' && typeof event.preventDefault === 'function') {
+    if (event && event.type === 'touchend' && typeof event.preventDefault === 'function' && !event.target.href && event.target.nodeName !== "INPUT") {
       event.preventDefault();
     }
     EventPropagators.accumulateTwoPhaseDispatches(event);

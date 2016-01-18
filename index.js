@@ -1,4 +1,4 @@
-if ('ontouchstart' in window) {
+module.exports = function () {
   var SimpleEventPlugin = require('react/lib/SimpleEventPlugin');
   var EventPluginHub = require('react/lib/EventPluginHub');
   // This is our hacked TapEventPlugin
@@ -11,5 +11,4 @@ if ('ontouchstart' in window) {
   EventPluginHub.injection.injectEventPluginsByName({
     'TapEventPlugin': TapEventPlugin
   });
-
 }
