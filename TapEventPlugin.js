@@ -68,6 +68,19 @@ var usedTouch = false;
 var usedTouchTime = 0;
 var TOUCH_DELAY = 100;
 
+function _isShouldBePrevented (event) {
+    // basic check
+    if (!event || event.type !== 'touchend' || typeof event.preventDefault !== 'function') {
+        return false;
+    }
+
+    // some special elements
+    if (event.target.href || event.target.nodeName !== "INPUT") {
+        return false;
+    }
+    return true;
+}
+
 var TapEventPlugin = {
 
   tapMoveThreshold: tapMoveThreshold,
@@ -109,7 +122,7 @@ var TapEventPlugin = {
       startCoords.x = 0;
       startCoords.y = 0;
     }
-    if (event && event.type === 'touchend' && typeof event.preventDefault === 'function' && !event.target.href && event.target.nodeName !== "INPUT") {
+    if (_isShouldBePrevented(event)) {
       event.preventDefault();
     }
     EventPropagators.accumulateTwoPhaseDispatches(event);
