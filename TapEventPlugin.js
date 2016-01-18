@@ -75,7 +75,7 @@ function _isShouldBePrevented (event) {
     }
 
     // some special elements
-    if (event.target.href || event.target.nodeName !== "INPUT") {
+    if (event.target.href || event.target.nodeName === "INPUT") {
         return false;
     }
     return true;
