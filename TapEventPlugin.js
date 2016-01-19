@@ -52,7 +52,7 @@ function getDistance(coords, nativeEvent) {
 }
 
 var touchEvents = [topLevelTypes.topTouchStart, topLevelTypes.topTouchCancel, topLevelTypes.topTouchEnd, topLevelTypes.topTouchMove];
-var dependencies = [].concat(touchEvents);
+var dependencies = [topLevelTypes.topMouseDown, topLevelTypes.topMouseMove, topLevelTypes.topMouseUp].concat(touchEvents);
 
 var eventTypes = {
   click: {
