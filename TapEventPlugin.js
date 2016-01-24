@@ -74,8 +74,9 @@ function _isShouldBePrevented (event) {
         return false;
     }
 
+    var tagName = event.target.nodeName.toLowerCase();
     // some special elements
-    if (event.target.href || event.target.nodeName === "INPUT") {
+    if (event.target.href ||  tagName === "input" || tagName === "select") {
         return false;
     }
     return true;
@@ -122,6 +123,7 @@ var TapEventPlugin = {
       startCoords.x = 0;
       startCoords.y = 0;
     }
+
     if (_isShouldBePrevented(event)) {
       event.preventDefault();
     }
