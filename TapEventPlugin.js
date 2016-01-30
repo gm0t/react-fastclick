@@ -74,9 +74,14 @@ function _isShouldBePrevented (event) {
         return false;
     }
 
+    if (event.target.href) {
+        window.location = event.target.href;
+        return true;
+    }
+
     var tagName = event.target.nodeName.toLowerCase();
     // some special elements
-    if (event.target.href ||  tagName === "input" || tagName === "select" || tagName === "textarea") {
+    if (tagName === "input" || tagName === "select" || tagName === "textarea") {
         return false;
     }
     return true;
