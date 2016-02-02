@@ -81,7 +81,7 @@ function _isShouldBePrevented (event) {
 
     var tagName = event.target.nodeName.toLowerCase();
     // some special elements
-    if (tagName === "input" || tagName === "select" || tagName === "textarea") {
+    if (tagName === "input" || tagName === "select" || tagName === "textarea" || (tagName === "a" && event.target.getAttribute("href"))) {
         return false;
     }
     return true;
