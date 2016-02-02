@@ -74,7 +74,7 @@ function _isShouldBePrevented (event) {
         return false;
     }
 
-    if (event.target.href) {
+    if (event.target.href && !event.target.getAttribute("target")) {
         window.location = event.target.href;
         return true;
     }
