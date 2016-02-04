@@ -12,6 +12,16 @@ module.exports = function () {
   delete EventPluginRegistry.registrationNameModules.onClick;
   delete EventPluginRegistry.registrationNameModules.onClickCapture;
 
+  // we have to ovveride 'extractEvents', in order to remove any topClick events
+  var originalExtractEvents = SimpleEventPlugin.extractEvents;
+  SimpleEventPlugin.extractEvents = function (topLevelType, topLevelTarget, topLevelTargetID, nativeEvent, nativeEventTarget) {
+    if (topLevelType === "topClick") {
+        return null;
+    }
+
+    return originalExtractEvents.call(SimpleEventPlugin, topLevelType, topLevelTarget, topLevelTargetID, nativeEvent, nativeEventTarget);
+  }
+
   // Register new event
   EventPluginHub.injection.injectEventPluginsByName({
     'TapEventPlugin': TapEventPlugin
